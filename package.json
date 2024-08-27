@@ -1,0 +1,19 @@
+{
+	"name": "wop-responsive-block-settings",
+	"version": "1.0.0",
+	"author": "Stefano Ginella",
+	"repository": {
+	  "type": "git",
+	  "url": "https://github.com/woptimize/wop-responsive-block-settings"
+	},
+	"license": "GPL-2.0-or-later",
+	"devDependencies": {
+		"@wordpress/scripts": "^28.6.0",
+		"path": "^0.12.7",
+		"webpack-remove-empty-scripts": "^1.0.4"
+	},
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start"
+	}
+}

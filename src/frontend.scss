@@ -1,0 +1,192 @@
+
+
+@mixin adjust-alignment {
+	// Match "justification" and "vertical alignment" in the editor
+	// And keep it consistent
+	align-items: flex-start;
+	justify-content: center;
+
+	&.is-content-justification-right {
+		align-items: flex-end;
+	}
+	&.is-content-justification-left {
+		align-items: flex-start;
+	}
+	&.is-content-justification-center {
+		align-items: center;
+	}
+	&.is-content-justification-space-between {
+		align-items: stretch;
+	}
+	&.is-vertical-align-top {
+		justify-content: flex-start;
+	}
+	&.is-vertical-align-bottom {
+		justify-content: flex-end;
+	}
+	&.is-vertical-align-center {
+		justify-content: center;
+	}
+	&.is-vertical-align-stretch {
+		justify-content: stretch;
+	}
+}
+
+// Desktop
+@media (min-width: 1024px) {
+	body:not(.wp-admin):not(.block-editor-iframe__body) .wop-hide-on-desktop,
+	.editor-styles-wrapper .wop-hide-on-desktop.wop-hide-on-editor  {
+		display: none !important;
+	}
+	.editor-styles-wrapper .wop-hide-on-desktop:not(.wop-hide-on-editor) {
+		outline: 2px dashed #ccc;
+		opacity: .5;
+	}
+}
+
+// Tablet
+@media (min-width: 768px) and (max-width: 1023px) {
+	body:not(.wp-admin):not(.block-editor-iframe__body) .wop-hide-on-tablet,
+	.editor-styles-wrapper .wop-hide-on-tablet.wop-hide-on-editor  {
+		display: none !important;
+	}
+	.editor-styles-wrapper .wop-hide-on-tablet:not(.wop-hide-on-editor) {
+		outline: 2px dashed #ccc;
+		opacity: .5;
+		filter: saturate(0);
+	}
+
+	.is-layout-flex.wop-stack-on-tablet {
+		flex-direction: column;
+		@include adjust-alignment;
+	}
+
+	.wop-reverse-on-tablet {
+		flex-direction: row-reverse;
+
+		&.is-vertical, &.wop-stack-on-tablet {
+			flex-direction: column-reverse;
+		}
+
+	}
+
+	.wop-has-order {
+		order: var(--wop--order--tablet, 0);
+	}
+}
+
+// Mobile
+@media (max-width: 767px) {
+	body:not(.wp-admin):not(.block-editor-iframe__body) .wop-hide-on-mobile,
+	.editor-styles-wrapper .wop-hide-on-mobile.wop-hide-on-editor {
+		display: none !important;
+	}
+	.editor-styles-wrapper .wop-hide-on-mobile:not(.wop-hide-on-editor) {
+		outline: 2px dashed #ccc;
+		opacity: .5;
+	}
+
+	.wop-stack-on-mobile {
+		flex-direction: column;
+		@include adjust-alignment;
+	}
+
+	.wop-reverse-on-mobile {
+		flex-direction: row-reverse;
+
+		&.is-vertical, &.wop-stack-on-mobile {
+			flex-direction: column-reverse;
+		}
+
+	}
+
+	.wop-has-order {
+		order: var(--wop--order--mobile, 0);
+	}
+}
+
+// Custom Mobile Menu Breakpoint
+.wop-has-mobile-menu-breakpoint {
+	.wp-block-navigation__responsive-container-open:not(.always-shown) {
+		display: flex;
+	}
+
+	.wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+		display: none;
+	}
+	@media (min-width: 480px) {
+		&.wop-mobile-menu-breakpoint-480 {
+			.wp-block-navigation__responsive-container-open:not(.always-shown) {
+				display: none;
+			}
+
+			.wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+				display: block;
+				width: 100%;
+				position: relative;
+				z-index: auto;
+				background-color: inherit;
+			}
+		}
+	}
+	@media (min-width: 768px) {
+		&.wop-mobile-menu-breakpoint-768 {
+			.wp-block-navigation__responsive-container-open:not(.always-shown) {
+				display: none;
+			}
+
+			.wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+				display: block;
+				width: 100%;
+				position: relative;
+				z-index: auto;
+				background-color: inherit;
+			}
+		}
+	}
+	@media (min-width: 992px) {
+		&.wop-mobile-menu-breakpoint-992 {
+			.wp-block-navigation__responsive-container-open:not(.always-shown) {
+				display: none;
+			}
+
+			.wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+				display: block;
+				width: 100%;
+				position: relative;
+				z-index: auto;
+				background-color: inherit;
+			}
+		}
+	}
+	@media (min-width: 1024px) {
+		&.wop-mobile-menu-breakpoint-1024 {
+			.wp-block-navigation__responsive-container-open:not(.always-shown) {
+				display: none;
+			}
+
+			.wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+				display: block;
+				width: 100%;
+				position: relative;
+				z-index: auto;
+				background-color: inherit;
+			}
+		}
+	}
+	@media (min-width: 1200px) {
+		&.wop-mobile-menu-breakpoint-1200 {
+			.wp-block-navigation__responsive-container-open:not(.always-shown) {
+				display: none;
+			}
+
+			.wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+				display: block;
+				width: 100%;
+				position: relative;
+				z-index: auto;
+				background-color: inherit;
+			}
+		}
+	}
+}
