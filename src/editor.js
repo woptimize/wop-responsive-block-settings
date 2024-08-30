@@ -3,13 +3,14 @@
  */
 import { __ } from '@wordpress/i18n'
 import { addFilter } from '@wordpress/hooks'
+import { createHigherOrderComponent } from '@wordpress/compose'
 import { InspectorControls } from '@wordpress/block-editor'
 import {
 	PanelBody,
 	ToggleControl,
+	__experimentalNumberControl as NumberControl,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
-	__experimentalNumberControl as NumberControl,
 } from '@wordpress/components'
 
 /**
@@ -17,12 +18,11 @@ import {
  */
 import { defaultSettings } from './data/default-settings'
 import {
-	shouldEnableOrder,
 	shouldEnableReverse,
 	shouldEnableStack,
-	shouldEnableMobileMenu
+	shouldEnableOrder,
+	shouldEnableMobileMenu,
 } from './utils'
-import { init as initBlockListIcon } from './editor/block-list-icon';
 
 /**
  * Adds custom attributes to blocks.
@@ -33,7 +33,7 @@ import { init as initBlockListIcon } from './editor/block-list-icon';
  *
  * @return {Object} Updated block properties with custom attributes.
  */
-const addAttributes = (props) => {
+const addResponsiveAttributes = (props) => {
 	const newProps = {
 		...props,
 		attributes: {
@@ -46,10 +46,9 @@ const addAttributes = (props) => {
 }
 addFilter(
 	'blocks.registerBlockType',
-	'wop/rbs/add-attributes',
-	addAttributes
+	'wop/rbs/add-responsive-attributes',
+	addResponsiveAttributes
 )
-
 
 /**
  * Adds custom responsive settings controls to the block inspector panel.
@@ -60,7 +59,7 @@ addFilter(
  *
  * @return {Object} Wrapped component with added inspector controls.
  */
-function addInspectorControls( BlockEdit ) {
+const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
 		const { attributes, setAttributes, name, clientId } = props
 		const {
@@ -257,11 +256,11 @@ function addInspectorControls( BlockEdit ) {
 			</>
 		)
 	}
-}
+}, 'withResponsiveControls')
 addFilter(
 	'editor.BlockEdit',
-	'wop/rbs/add-inspector-controls',
-	addInspectorControls,
+	'wop/rbs/with-responsive-controls',
+	withResponsiveControls,
 	100 // Adjust to change position in the sidebar
 )
 
@@ -276,7 +275,7 @@ addFilter(
  *
  * @return {Object} Wrapped component with added custom classes.
  */
-function updateBlockMarkup( BlockListBlock ) {
+const withResponsiveAttributes = createHigherOrderComponent( ( BlockListBlock ) => {
 	return ( props ) => {
 		const { attributes, className, wrapperProps: existingWrapperProps = {} } = props
 		const {
@@ -320,19 +319,14 @@ function updateBlockMarkup( BlockListBlock ) {
 			classes.push( 'wop-mobile-menu-breakpoint-' + mobileMenu.breakpoint )
 		}
 		wrapperProps.style = style
-		wrapperProps.className = classes.join(' ')
+		props.className = classes.join(' ')
+		props.wrapperProps = wrapperProps
 
-		return <BlockListBlock { ...props } wrapperProps={wrapperProps} />
+		return <BlockListBlock { ...props } />
 	}
-}
+}, 'withResponsiveAttributes')
 addFilter(
 	'editor.BlockListBlock',
-	'wop/rbs/edit-markup',
-	updateBlockMarkup
+	'wop/rbs/with-responsive-attributes',
+	withResponsiveAttributes
 )
-
-
-
-wp.domReady(() => {
-    initBlockListIcon();
-});

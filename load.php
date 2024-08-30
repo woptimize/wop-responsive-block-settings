@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Responsive Block Settings
  * Plugin URI:        https://www.woptimize.io
- * Description:       Add responsive settings to all WordPress blocks. Hide any block on mobile, tablet or desktop; stack, reverse, or set custom order for inner blocks in groups and columns; change the mobile menu breakpoint.
+ * Description:       Easily add responsive settings to all WordPress blocks. Control block visibility on mobile, tablet, and desktop; adjust block order within groups and columns; and customize the mobile menu breakpoint.
  * Version:           1.0.0
  * Requires at least: 6.4
  * Requires PHP:      7.4

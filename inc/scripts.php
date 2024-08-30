@@ -7,7 +7,7 @@
  * @since   1.0.0
  */
 
-namespace Woptimize\Rbs\Admin;
+namespace Woptimize\RBS\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
