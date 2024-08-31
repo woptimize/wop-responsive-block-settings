@@ -17,7 +17,7 @@ export default function shouldEnableStack( name, layout, previousState, setAttri
 	let shouldEnable = false
 
 	if (
-		name === 'core/group' && layout.type === 'flex' && layout.orientation !== 'vertical'
+		name === 'core/group' && layout?.type === 'flex' && layout?.orientation !== 'vertical'
 	) {
 		shouldEnable = true
 	}

@@ -37,7 +37,7 @@ export default function shouldEnableOrder( clientId, previousState, setAttribute
 
 		if (
 			parentBlock.name === 'core/columns' ||
-			( parentBlock.name === 'core/group' && ['flex', 'grid'].includes( parentBlock.attributes.layout.type ) )
+			( parentBlock.name === 'core/group' && ['flex', 'grid'].includes( parentBlock.attributes.layout?.type ) )
 		) {
 			shouldEnable = true
 		}

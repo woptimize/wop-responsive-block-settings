@@ -17,7 +17,7 @@ export default function shouldEnableReverse( name, layout, previousState, setAtt
 	let shouldEnable = false
 
 	if (
-		(name === 'core/group' && layout.type === 'flex') ||
+		(name === 'core/group' && layout?.type === 'flex') ||
 		name === 'core/columns'
 	) {
 		shouldEnable = true
