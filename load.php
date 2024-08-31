@@ -22,8 +22,7 @@ defined( 'ABSPATH' ) || exit;
 // Define useful constants
 define( 'WOP_RBS_URL', plugin_dir_url( __FILE__ ) );
 define( 'WOP_RBS_DIR', plugin_dir_path( __FILE__ ) );
-$plugin_data = get_file_data( __FILE__, array( 'Version' => 'Version' ) );
-define( 'WOP_RBS_VER', $plugin_data['Version'] );
+define( 'WOP_RBS_VER', '1.0.0' );
 
 // Includes
 $includes = [
@@ -31,5 +30,5 @@ $includes = [
 	'scripts'
 ];
 foreach ( $includes as $include ) {
-	require_once( "inc/$include.php" );
+	require_once( WOP_RBS_DIR . "inc/$include.php" );
 }
