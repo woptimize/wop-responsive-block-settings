@@ -53,35 +53,22 @@ function render_block_settings( $block_content, $block ) {
 		if ( ! $visibility['mobile'] ) $classes[] = 'wop-hide-on-mobile';
 	}
 	// Reverse classes
-    if ( $reverse['enabled'] ?? false ) {
-		if ( $reverse['tablet'] ) $classes[] = 'wop-reverse-on-tablet';
-		if ( $reverse['mobile'] ) $classes[] = 'wop-reverse-on-mobile';
-	}
+	if ( $reverse['tablet'] ) $classes[] = 'wop-reverse-on-tablet';
+	if ( $reverse['mobile'] ) $classes[] = 'wop-reverse-on-mobile';
 	// Stack classes
-    if ( $stack['enabled'] ?? false ) {
-		if ( $stack['tablet'] ) $classes[] = 'wop-stack-on-tablet';
-		if ( $stack['mobile'] ) $classes[] = 'wop-stack-on-mobile';
-	}
+	if ( $stack['tablet'] ) $classes[] = 'wop-stack-on-tablet';
+	if ( $stack['mobile'] ) $classes[] = 'wop-stack-on-mobile';
 
 	// Order class & CSS variables
 	$style = '';
-	if (
-		( $order['enabled'] ?? false ) &&
-		(
-			$order['tablet'] !== 0 ||
-			$order['mobile'] !== 0
-		)
-	) {
+	if ( $order['tablet'] !== 0 || $order['mobile'] !== 0 ) {
 		$style .= '--wop--order--tablet:' . $order['tablet'] . ';';
 		$style .= '--wop--order--mobile:' . $order['mobile'] . ';';
 		$classes[] = 'wop-has-order';
 	}
 
 	// Mobile Menu class & CSS variables
-	if (
-		( $mobileMenu['enabled'] ?? false ) &&
-		$mobileMenu['breakpoint'] !== 600
-	) {
+	if ( $mobileMenu['breakpoint'] !== 600 ) {
 		$classes[] = 'wop-has-mobile-menu-breakpoint';
 		$classes[] = 'wop-mobile-menu-breakpoint-' . $mobileMenu['breakpoint'];
 	}
@@ -106,7 +93,7 @@ function render_block_settings( $block_content, $block ) {
         // Add or merge inline styles
         if ( $style ) {
 			$existing_style = $html_tags->get_attribute( 'style' ) ?? '';
-            $html_tags->set_attribute( 'style', trim($existing_style . ' ' . $style) );
+            $html_tags->set_attribute( 'style', trim($style . ' ' . $existing_style ) );
 
 		}
 	}

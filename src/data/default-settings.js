@@ -5,7 +5,6 @@ export const defaultSettings = {
 	wopVisibility: {
 		type: 'object',
 		default: {
-			enabled: false,
 			desktop: true,
 			tablet: true,
 			mobile: true,
@@ -15,7 +14,6 @@ export const defaultSettings = {
 	wopStack: {
 		type: 'object',
 		default: {
-			enabled: false,
 			tablet: false,
 			mobile: false,
 		}
@@ -23,7 +21,6 @@ export const defaultSettings = {
 	wopReverse: {
 		type: 'object',
 		default: {
-			enabled: false,
 			tablet: false,
 			mobile: false,
 		}
@@ -31,7 +28,6 @@ export const defaultSettings = {
 	wopOrder: {
 		type: 'object',
 		default: {
-			enabled: false,
 			tablet: 0,
 			mobile: 0,
 		}
@@ -39,7 +35,6 @@ export const defaultSettings = {
 	wopMobileMenu: {
 		type: 'object',
 		default: {
-			enabled: false,
 			breakpoint: 600
 		}
 	}

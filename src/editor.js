@@ -79,23 +79,23 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 		// Determine if custom ordering should be enabled
 		const enableOrder = useMemo( () =>
-			shouldEnableOrder(clientId, order, setAttributes),
-			[clientId, order]
+			shouldEnableOrder(clientId),
+			[clientId]
 		);
 		// Determine if reverse settings should be enabled
 		const enableReverse = useMemo( () =>
-			shouldEnableReverse(name, layout, reverse, setAttributes),
-			[name, layout, reverse]
+			shouldEnableReverse(name, layout),
+			[name, layout]
 		);
 		// Determine if stack settings should be enabled
 		const enableStack = useMemo( () =>
-			shouldEnableStack(name, layout, stack, setAttributes),
-			[name, layout, stack]
+			shouldEnableStack(name, layout),
+			[name, layout]
 		);
 		// Determine if mobile menu settings should be enabled
 		const enableMobileMenu = useMemo( () =>
-			shouldEnableMobileMenu(name, overlayMenu, mobileMenu, setAttributes),
-			[name, overlayMenu, mobileMenu]
+			shouldEnableMobileMenu(name, overlayMenu),
+			[name, overlayMenu]
 		);
 
 		/**
@@ -107,10 +107,6 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 		 *        that you want to update. For example, 'desktop' or 'mobile'.
 		 * @param {*} value - The new value for the property specified by `key`. The type can
 		 *        be anything depending on the property (e.g., boolean, string, number).
-		 *
-		 * @example
-		 * // Update the 'desktop' property within the 'wopVisibility' attribute
-		 * updateAttribute('wopVisibility', 'desktop', true);
 		 *
 		 * @returns {void}
 		 */
@@ -284,24 +280,19 @@ const withResponsiveAttributes = createHigherOrderComponent( ( BlockListBlock ) 
 			if ( ! visibility.editor ) classes.push( 'wop-hide-on-editor' )
 		}
 
-		if ( reverse?.enabled ) {
-			if ( reverse.tablet ) classes.push( 'wop-reverse-on-tablet' )
-			if ( reverse.mobile ) classes.push( 'wop-reverse-on-mobile' )
-		}
+		if ( reverse?.tablet ) classes.push( 'wop-reverse-on-tablet' )
+		if ( reverse?.mobile ) classes.push( 'wop-reverse-on-mobile' )
 
-		if ( stack?.enabled ) {
-			if ( stack.tablet ) classes.push( 'wop-stack-on-tablet' )
-			if ( stack.mobile ) classes.push( 'wop-stack-on-mobile' )
-		}
-		if ( order?.enabled ) {
-			if ( order.tablet != 0 ) style = { ...style, '--wop--order--tablet': order.tablet }
-			if ( order.mobile != 0 ) style = { ...style, '--wop--order--mobile': order.mobile }
+		if ( stack?.tablet ) classes.push( 'wop-stack-on-tablet' )
+		if ( stack?.mobile ) classes.push( 'wop-stack-on-mobile' )
 
-			if ( order.mobile != 0 || order.tablet != 0 ) {
-				classes.push( 'wop-has-order' )
-			}
+		if ( order?.tablet ) style = { ...style, '--wop--order--tablet': order.tablet }
+		if ( order?.mobile ) style = { ...style, '--wop--order--mobile': order.mobile }
+
+		if ( order?.tablet || order?.mobile) {
+			classes.push( 'wop-has-order' )
 		}
-		if ( mobileMenu?.enabled && mobileMenu.breakpoint !== 600 ) {
+		if ( mobileMenu?.breakpoint && mobileMenu.breakpoint != 600 ) {
 			classes.push( 'wop-has-mobile-menu-breakpoint' )
 			classes.push( 'wop-mobile-menu-breakpoint-' + mobileMenu.breakpoint )
 		}

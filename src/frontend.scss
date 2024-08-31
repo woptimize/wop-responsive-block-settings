@@ -36,6 +36,19 @@
 	filter: saturate(0);
 }
 
+@mixin menu-styles {
+	.wp-block-navigation__responsive-container-open:not(.always-shown) {
+		display: none;
+	}
+
+	.wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+		display: block;
+		width: 100%;
+		position: relative;
+		z-index: auto;
+		background-color: inherit;
+	}
+}
 
 // Desktop
 @media (min-width: 1024px) {
@@ -113,22 +126,29 @@
 	.wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
 		display: none;
 	}
-
-	@each $breakpoint in (480, 768, 992, 1024, 1200) {
-		@media (min-width: $breakpoint) {
-			&.wop-mobile-menu-breakpoint-#{$breakpoint} {
-				.wp-block-navigation__responsive-container-open:not(.always-shown) {
-				display: none;
-				}
-
-				.wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
-				display: block;
-				width: 100%;
-				position: relative;
-				z-index: auto;
-				background-color: inherit;
-				}
-			}
+	@media (min-width: 480px) {
+		&.wop-mobile-menu-breakpoint-480 {
+			@include menu-styles;
 		}
-	  }
+	}
+	@media (min-width: 768px) {
+		&.wop-mobile-menu-breakpoint-768 {
+			@include menu-styles;
+		}
+	}
+	@media (min-width: 992px) {
+		&.wop-mobile-menu-breakpoint-992 {
+			@include menu-styles;
+		}
+	}
+	@media (min-width: 1024px) {
+		&.wop-mobile-menu-breakpoint-1024 {
+			@include menu-styles;
+		}
+	}
+	@media (min-width: 1200px) {
+		&.wop-mobile-menu-breakpoint-1200 {
+			@include menu-styles;
+		}
+	}
 }
