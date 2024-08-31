@@ -53,22 +53,27 @@ function render_block_settings( $block_content, $block ) {
 		if ( ! $visibility['mobile'] ) $classes[] = 'wop-hide-on-mobile';
 	}
 	// Reverse classes
-	if ( $reverse['tablet'] ) $classes[] = 'wop-reverse-on-tablet';
-	if ( $reverse['mobile'] ) $classes[] = 'wop-reverse-on-mobile';
+    if ( $reverse ) {
+		if ( $reverse['tablet'] ) $classes[] = 'wop-reverse-on-tablet';
+		if ( $reverse['mobile'] ) $classes[] = 'wop-reverse-on-mobile';
+	}
 	// Stack classes
-	if ( $stack['tablet'] ) $classes[] = 'wop-stack-on-tablet';
-	if ( $stack['mobile'] ) $classes[] = 'wop-stack-on-mobile';
+	if ( $stack ) {
+		if ( $stack['tablet'] ) $classes[] = 'wop-stack-on-tablet';
+		if ( $stack['mobile'] ) $classes[] = 'wop-stack-on-mobile';
+	}
 
 	// Order class & CSS variables
 	$style = '';
-	if ( $order['tablet'] !== 0 || $order['mobile'] !== 0 ) {
+	if ( $order && !empty($order['tablet']) || !empty($order['mobile'])) {
+
 		$style .= '--wop--order--tablet:' . $order['tablet'] . ';';
 		$style .= '--wop--order--mobile:' . $order['mobile'] . ';';
 		$classes[] = 'wop-has-order';
 	}
 
 	// Mobile Menu class & CSS variables
-	if ( $mobileMenu['breakpoint'] !== 600 ) {
+	if ( $mobileMenu && $mobileMenu['breakpoint'] !== 600 ) {
 		$classes[] = 'wop-has-mobile-menu-breakpoint';
 		$classes[] = 'wop-mobile-menu-breakpoint-' . $mobileMenu['breakpoint'];
 	}
