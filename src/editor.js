@@ -128,30 +128,30 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 			<>
 				<BlockEdit { ...props } />
 				<InspectorControls>
-					<PanelBody title={ __('Responsive Settings', 'wop-rbs') } initialOpen={ false }>
+					<PanelBody title={ __('Responsive Settings', 'wop-responsive-block-settings') } initialOpen={ false }>
 						<ToggleControl
-							label={ __('Visible on Desktop', 'wop-rbs') }
+							label={ __('Visible on Desktop', 'wop-responsive-block-settings') }
 							checked={ visibility.desktop }
 							onChange={ (desktop) =>
 								updateAttribute('wopVisibility', 'desktop', desktop)
 							}
 						/>
 						<ToggleControl
-							label={ __('Visible on Tablet', 'wop-rbs') }
+							label={ __('Visible on Tablet', 'wop-responsive-block-settings') }
 							checked={ visibility.tablet }
 							onChange={ (tablet) =>
 								updateAttribute('wopVisibility', 'tablet', tablet)
 							}
 						/>
 						<ToggleControl
-							label={ __('Visible on Mobile', 'wop-rbs') }
+							label={ __('Visible on Mobile', 'wop-responsive-block-settings') }
 							checked={ visibility.mobile }
 							onChange={ (mobile) =>
 								updateAttribute('wopVisibility', 'mobile', mobile)
 							}
 						/>
 						<ToggleControl
-							label={ __('Keep visible in the Editor', 'wop-rbs') }
+							label={ __('Keep visible in the Editor', 'wop-responsive-block-settings') }
 							help={ visibility.editor ? __('Displayed with a gray dotted outline and grayed out if it should not be visible.', 'bbe') : __('Hidden if it should not be visible.', 'bbe') }
 							checked={ visibility.editor }
 							onChange={ (editor) =>
@@ -162,14 +162,14 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 							<>
 								<hr />
 								<ToggleControl
-									label={ __('Reverse order on Tablet', 'wop-rbs') }
+									label={ __('Reverse order on Tablet', 'wop-responsive-block-settings') }
 									checked={ reverse.tablet }
 									onChange={ (tablet) =>
 										updateAttribute('wopReverse', 'tablet', tablet)
 									}
 								/>
 								<ToggleControl
-									label={ __('Reverse order on Mobile', 'wop-rbs') }
+									label={ __('Reverse order on Mobile', 'wop-responsive-block-settings') }
 									checked={ reverse.mobile }
 									onChange={ (mobile) =>
 										updateAttribute('wopReverse', 'mobile', mobile)
@@ -181,14 +181,14 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 							<>
 								<hr />
 								<ToggleControl
-									label={ __('Stack on Tablet', 'wop-rbs') }
+									label={ __('Stack on Tablet', 'wop-responsive-block-settings') }
 									checked={ stack.tablet }
 									onChange={ (tablet) =>
 										updateAttribute('wopStack', 'tablet', tablet)
 									}
 								/>
 								<ToggleControl
-									label={ __('Stack on Mobile', 'wop-rbs') }
+									label={ __('Stack on Mobile', 'wop-responsive-block-settings') }
 									checked={ stack.mobile }
 									onChange={ (mobile) =>
 										updateAttribute('wopStack', 'mobile', mobile)
@@ -200,7 +200,7 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 							<>
 								<hr />
 								<NumberControl
-									label={ __('Order on Tablet', 'wop-rbs') }
+									label={ __('Order on Tablet', 'wop-responsive-block-settings') }
 									value={ order.tablet }
 									onChange={ (tablet) => {
 										tablet = tablet == '' ? 0 : tablet
@@ -208,7 +208,7 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 									} }
 								/>
 								<NumberControl
-									label={ __('Order on Mobile', 'wop-rbs') }
+									label={ __('Order on Mobile', 'wop-responsive-block-settings') }
 									value={ order.mobile }
 									onChange={ (mobile) => {
 										mobile = mobile == '' ? 0 : mobile
@@ -221,7 +221,7 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 							<>
 								<hr />
 								<ToggleGroupControl
-									label={ __('Mobile Menu breakpoint in px', 'wop-rbs') }
+									label={ __('Mobile Menu breakpoint in px', 'wop-responsive-block-settings') }
 									help={ __('The WordPress default value is 600px.') }
 									value={ mobileMenu.breakpoint }
 									onChange={ (breakpoint) =>

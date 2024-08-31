@@ -1,6 +1,6 @@
 # Responsive Block Settings
 
-Easily add responsive settings to all WordPress blocks. Control block visibility on mobile, tablet, and desktop; adjust block order within groups and columns; and customize the mobile menu breakpoint.
+Easily add responsive settings to all WordPress blocks, and customize the mobile menu breakpoint.
 
 ## Requirements
 

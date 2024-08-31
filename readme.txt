@@ -8,7 +8,7 @@ Tags:              responsive, visibility, breakpoints, gutenberg plugin, block 
 License:           GPLv2 or later.
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Easily add responsive settings to all WordPress blocks. Control block visibility on mobile, tablet, and desktop; adjust block order within groups and columns; and customize the mobile menu breakpoint.
+Easily add responsive settings to all WordPress blocks, and customize the mobile menu breakpoint.
 
 == Description ==
 

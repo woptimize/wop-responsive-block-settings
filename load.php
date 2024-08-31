@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Responsive Block Settings
  * Plugin URI:        https://www.woptimize.io
- * Description:       Easily add responsive settings to all WordPress blocks. Control block visibility on mobile, tablet, and desktop; adjust block order within groups and columns; and customize the mobile menu breakpoint.
+ * Description:       Easily add responsive settings to all WordPress blocks, and customize the mobile menu breakpoint.
  * Version:           1.0.0
  * Requires at least: 6.4
  * Requires PHP:      7.4
@@ -10,7 +10,7 @@
  * Author URI:        https://www.stefanoginella.com
  * License:           GPLv2 or later.
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       wop-rbs
+ * Text Domain:       wop-responsive-block-settings
  *
  * @package wop-responsive-block-settings
  *
