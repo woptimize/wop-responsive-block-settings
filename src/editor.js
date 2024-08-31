@@ -14,6 +14,11 @@ import {
 } from '@wordpress/components'
 
 /**
+ * External dependencies
+ */
+import React, { useMemo } from 'react';
+
+/**
  * Internal dependencies
  */
 import { defaultSettings } from './data/default-settings'
@@ -73,13 +78,50 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 		} = attributes
 
 		// Determine if custom ordering should be enabled
-		const enableOrder = shouldEnableOrder( clientId, order, setAttributes )
+		const enableOrder = useMemo( () =>
+			shouldEnableOrder(clientId, order, setAttributes),
+			[clientId, order]
+		);
 		// Determine if reverse settings should be enabled
-		const enableReverse = shouldEnableReverse( name, layout, reverse, setAttributes )
+		const enableReverse = useMemo( () =>
+			shouldEnableReverse(name, layout, reverse, setAttributes),
+			[name, layout, reverse]
+		);
 		// Determine if stack settings should be enabled
-		const enableStack = shouldEnableStack( name, layout, stack, setAttributes )
+		const enableStack = useMemo( () =>
+			shouldEnableStack(name, layout, stack, setAttributes),
+			[name, layout, stack]
+		);
 		// Determine if mobile menu settings should be enabled
-		const enableMobileMenu = shouldEnableMobileMenu( name, overlayMenu, mobileMenu, setAttributes )
+		const enableMobileMenu = useMemo( () =>
+			shouldEnableMobileMenu(name, overlayMenu, mobileMenu, setAttributes),
+			[name, overlayMenu, mobileMenu]
+		);
+
+		/**
+		 * Updates a specific property within a nested attribute of the block's attributes object.
+		 *
+		 * @param {string} property - The name of the attribute within the `attributes` object
+		 *        that you want to update. For example, 'wopVisibility' or 'wopStack'.
+		 * @param {string} key - The specific property within the nested attribute
+		 *        that you want to update. For example, 'desktop' or 'mobile'.
+		 * @param {*} value - The new value for the property specified by `key`. The type can
+		 *        be anything depending on the property (e.g., boolean, string, number).
+		 *
+		 * @example
+		 * // Update the 'desktop' property within the 'wopVisibility' attribute
+		 * updateAttribute('wopVisibility', 'desktop', true);
+		 *
+		 * @returns {void}
+		 */
+		const updateAttribute  = (property, key, value) => {
+			setAttributes({
+				[property]: {
+					...attributes[property],
+					[key]: value,
+				},
+			});
+		};
 
 
 		return (
@@ -91,36 +133,21 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 							label={ __('Visible on Desktop', 'wop-rbs') }
 							checked={ visibility.desktop }
 							onChange={ (desktop) =>
-								setAttributes( {
-									wopVisibility : {
-										...visibility,
-										desktop
-									}
-								} )
+								updateAttribute('wopVisibility', 'desktop', desktop)
 							}
 						/>
 						<ToggleControl
 							label={ __('Visible on Tablet', 'wop-rbs') }
 							checked={ visibility.tablet }
 							onChange={ (tablet) =>
-								setAttributes( {
-									wopVisibility : {
-										...visibility,
-										tablet
-									}
-								} )
+								updateAttribute('wopVisibility', 'tablet', tablet)
 							}
 						/>
 						<ToggleControl
 							label={ __('Visible on Mobile', 'wop-rbs') }
 							checked={ visibility.mobile }
 							onChange={ (mobile) =>
-								setAttributes( {
-									wopVisibility : {
-										...visibility,
-										mobile
-									}
-								} )
+								updateAttribute('wopVisibility', 'mobile', mobile)
 							}
 						/>
 						<ToggleControl
@@ -128,12 +155,7 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 							help={ visibility.editor ? __('Displayed with a gray dotted outline and grayed out if it should not be visible.', 'bbe') : __('Hidden if it should not be visible.', 'bbe') }
 							checked={ visibility.editor }
 							onChange={ (editor) =>
-								setAttributes( {
-									wopVisibility : {
-										...visibility,
-										editor
-									}
-								} )
+								updateAttribute('wopVisibility', 'editor', editor)
 							}
 						/>
 						{ enableReverse &&
@@ -143,24 +165,14 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 									label={ __('Reverse order on Tablet', 'wop-rbs') }
 									checked={ reverse.tablet }
 									onChange={ (tablet) =>
-										setAttributes( {
-											wopReverse : {
-												...reverse,
-												tablet
-											}
-										} )
+										updateAttribute('wopReverse', 'tablet', tablet)
 									}
 								/>
 								<ToggleControl
 									label={ __('Reverse order on Mobile', 'wop-rbs') }
 									checked={ reverse.mobile }
 									onChange={ (mobile) =>
-										setAttributes( {
-											wopReverse : {
-												...reverse,
-												mobile
-											}
-										} )
+										updateAttribute('wopReverse', 'mobile', mobile)
 									}
 								/>
 							</>
@@ -172,24 +184,14 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 									label={ __('Stack on Tablet', 'wop-rbs') }
 									checked={ stack.tablet }
 									onChange={ (tablet) =>
-										setAttributes( {
-											wopStack : {
-												...stack,
-												tablet
-											}
-										} )
+										updateAttribute('wopStack', 'tablet', tablet)
 									}
 								/>
 								<ToggleControl
 									label={ __('Stack on Mobile', 'wop-rbs') }
 									checked={ stack.mobile }
 									onChange={ (mobile) =>
-										setAttributes( {
-											wopStack : {
-												...stack,
-												mobile
-											}
-										} )
+										updateAttribute('wopStack', 'mobile', mobile)
 									}
 								/>
 							</>
@@ -202,12 +204,7 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 									value={ order.tablet }
 									onChange={ (tablet) => {
 										tablet = tablet == '' ? 0 : tablet
-										setAttributes( {
-											wopOrder : {
-												...order,
-												tablet
-											}
-										} )
+										updateAttribute('wopOrder', 'tablet', tablet)
 									} }
 								/>
 								<NumberControl
@@ -215,12 +212,7 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 									value={ order.mobile }
 									onChange={ (mobile) => {
 										mobile = mobile == '' ? 0 : mobile
-										setAttributes( {
-											wopOrder : {
-												...order,
-												mobile
-											}
-										} )
+										updateAttribute('wopOrder', 'mobile', mobile)
 									} }
 								/>
 							</>
@@ -233,12 +225,7 @@ const withResponsiveControls = createHigherOrderComponent( ( BlockEdit ) => {
 									help={ __('The WordPress default value is 600px.') }
 									value={ mobileMenu.breakpoint }
 									onChange={ (breakpoint) =>
-										setAttributes( {
-											wopMobileMenu : {
-												...mobileMenu,
-												breakpoint
-											}
-										} )
+										updateAttribute('wopMobileMenu', 'breakpoint', breakpoint)
 									}
 									isBlock
 								>
@@ -297,16 +284,16 @@ const withResponsiveAttributes = createHigherOrderComponent( ( BlockListBlock ) 
 			if ( ! visibility.editor ) classes.push( 'wop-hide-on-editor' )
 		}
 
-		if ( reverse && reverse.enabled ) {
+		if ( reverse?.enabled ) {
 			if ( reverse.tablet ) classes.push( 'wop-reverse-on-tablet' )
 			if ( reverse.mobile ) classes.push( 'wop-reverse-on-mobile' )
 		}
 
-		if ( stack && stack.enabled ) {
+		if ( stack?.enabled ) {
 			if ( stack.tablet ) classes.push( 'wop-stack-on-tablet' )
 			if ( stack.mobile ) classes.push( 'wop-stack-on-mobile' )
 		}
-		if ( order && order.enabled ) {
+		if ( order?.enabled ) {
 			if ( order.tablet != 0 ) style = { ...style, '--wop--order--tablet': order.tablet }
 			if ( order.mobile != 0 ) style = { ...style, '--wop--order--mobile': order.mobile }
 
@@ -314,7 +301,7 @@ const withResponsiveAttributes = createHigherOrderComponent( ( BlockListBlock ) 
 				classes.push( 'wop-has-order' )
 			}
 		}
-		if ( mobileMenu && mobileMenu.enabled && mobileMenu.breakpoint !== 600 ) {
+		if ( mobileMenu?.enabled && mobileMenu.breakpoint !== 600 ) {
 			classes.push( 'wop-has-mobile-menu-breakpoint' )
 			classes.push( 'wop-mobile-menu-breakpoint-' + mobileMenu.breakpoint )
 		}

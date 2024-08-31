@@ -29,41 +29,36 @@ use WP_HTML_Tag_Processor;
  */
 function render_block_settings( $block_content, $block ) {
 
-	// Get all responsive attributes
-	$visibility = $block['attrs']['wopVisibility'] ?? null;
-	$stack = $block['attrs']['wopStack'] ?? null;
-	$reverse = $block['attrs']['wopReverse'] ?? null;
-	$order = $block['attrs']['wopOrder'] ?? null;
-	$mobileMenu = $block['attrs']['wopMobileMenu'] ?? null;
+    // Extract attributes with null coalescing
+    $attrs = $block['attrs'] ?? [];
+    $visibility = $attrs['wopVisibility'] ?? null;
+    $stack = $attrs['wopStack'] ?? null;
+    $reverse = $attrs['wopReverse'] ?? null;
+    $order = $attrs['wopOrder'] ?? null;
+    $mobileMenu = $attrs['wopMobileMenu'] ?? null;
 
-	// Return original content if ALL block settings are not defined
-	if (
-		! isset( $visibility ) &&
-		! isset( $stack ) &&
-		! isset( $reverse ) &&
-		! isset( $order) &&
-		! isset( $mobileMenu)
-	) {
-		return $block_content;
-	}
+	// Return original content if no settings are defined
+    if ( ! ( $visibility || $stack || $reverse || $order || $mobileMenu ) ) {
+        return $block_content;
+    }
 
 	// Array to store responsive classes
 	$classes = array();
 
 
 	// Visibility classes
-	if ( isset( $visibility ) ) {
+    if ( $visibility ) {
 		if ( ! $visibility['desktop'] ) $classes[] = 'wop-hide-on-desktop';
 		if ( ! $visibility['tablet'] ) $classes[] = 'wop-hide-on-tablet';
 		if ( ! $visibility['mobile'] ) $classes[] = 'wop-hide-on-mobile';
 	}
 	// Reverse classes
-	if ( isset( $reverse ) && $reverse['enabled'] ) {
+    if ( $reverse['enabled'] ?? false ) {
 		if ( $reverse['tablet'] ) $classes[] = 'wop-reverse-on-tablet';
 		if ( $reverse['mobile'] ) $classes[] = 'wop-reverse-on-mobile';
 	}
 	// Stack classes
-	if ( isset( $stack ) && $stack['enabled'] ) {
+    if ( $stack['enabled'] ?? false ) {
 		if ( $stack['tablet'] ) $classes[] = 'wop-stack-on-tablet';
 		if ( $stack['mobile'] ) $classes[] = 'wop-stack-on-mobile';
 	}
@@ -71,8 +66,7 @@ function render_block_settings( $block_content, $block ) {
 	// Order class & CSS variables
 	$style = '';
 	if (
-		isset( $order ) &&
-		$order['enabled'] &&
+		( $order['enabled'] ?? false ) &&
 		(
 			$order['tablet'] !== 0 ||
 			$order['mobile'] !== 0
@@ -85,8 +79,7 @@ function render_block_settings( $block_content, $block ) {
 
 	// Mobile Menu class & CSS variables
 	if (
-		isset( $mobileMenu ) &&
-		$mobileMenu['enabled'] &&
+		( $mobileMenu['enabled'] ?? false ) &&
 		$mobileMenu['breakpoint'] !== 600
 	) {
 		$classes[] = 'wop-has-mobile-menu-breakpoint';
@@ -99,8 +92,8 @@ function render_block_settings( $block_content, $block ) {
 	}
 
 	// Add missing vertical alignment class
-	if ( ! empty( $block['attrs']['layout']['verticalAlignment'] ) ) {
-		$classes[] = 'is-vertical-align-' . sanitize_title( $block['attrs']['layout']['verticalAlignment'] );
+	if ( ! empty( $attrs['layout']['verticalAlignment'] ) ) {
+		$classes[] = 'is-vertical-align-' . sanitize_title( $attrs['layout']['verticalAlignment'] );
 	}
 
 	// Process the block HTML
@@ -110,14 +103,11 @@ function render_block_settings( $block_content, $block ) {
 	if ( $html_tags->next_tag() ) {
 		// Add responsive classes
 		$html_tags->add_class( implode( ' ', $classes ) );
-		// Add inline styles
-		if ( $style != '' ) {
-			// Concatenate any existing inline styles
-			if ( $original_style = $html_tags->get_attribute( 'style' ) ) {
-				$style = $original_style . ' ' . $style;
-			}
-			// `set_attribute` will override any existing style
-			$html_tags->set_attribute( 'style', $style );
+        // Add or merge inline styles
+        if ( $style ) {
+			$existing_style = $html_tags->get_attribute( 'style' ) ?? '';
+            $html_tags->set_attribute( 'style', trim($existing_style . ' ' . $style) );
+
 		}
 	}
 
