@@ -22,10 +22,38 @@ Easily add responsive settings to all WordPress blocks, and customize the mobile
 
 This plugin provides a simple, intuitive interface, making it accessible for users of all skill levels. It's perfect for anyone looking to fine-tune their site's responsiveness without touching a single line of code.
 
-
 === Usage ===
 
-A picture is worth a thousand words. Check out the screenshots below to see how **Responsive Block Settings** can improve your site's responsive design.
+**For All Blocks:**
+
+- Toggle "Hide on Desktop", "Hide on Tablet", and "Hide on Mobile" options to control visibility across devices.
+- Enable "Keep visible in the Editor" to maintain block visibility during editing, even when hidden at certain resolutions. Blocks will appear with a dashed border and grayed-out, preserving layout awareness.
+
+**For Stack Groups, Row Groups, and Columns:**
+
+- Toggle "Reverse order on Tablet" and "Reverse order on Mobile" to alter the sequence of inner blocks on respective devices and reverse the order.
+
+
+**For Row Groups:**
+
+- Toggle "Stack on Tablet" and "Stack on Mobile" to arrange inner blocks vertically on smaller screens.
+
+**For Direct Child Blocks (within Stack Groups, Row Groups, Grid Groups, and Columns):**
+
+- Specify custom values for "Order on Tablet" and "Order on Mobile" to set precise positioning on different devices.
+
+**For Navigation Blocks with Mobile Overlay Menu:**
+
+- Select a custom breakpoint to determine when the navigation collapses into a menu icon, allowing for tailored responsive behavior.
+
+=== Screenshots ===
+
+1. Visibility options available on all blocks for desktop, tablet, and mobile.
+2. "Keep visible in the Editor" will keep the block visible with a dashed border and grayed out if if should be hidden at the current resolution.
+3. Stack groups, Row groups, and Columns will have the options to reverse the order of inner blocks on tablet and mobile.
+4. Row groups will also have the options to stack inner blocks on tablet and mobile.
+5. Direct inner blocks of Stack groups, Row groups, Grid groups, and Columns will have the options to set a specific order within their parent on tablet and mobile.
+6. Navigation blocks with the Mobile Overlay Menu will have the option to select a different breakpoint to collapse the natigation and display the menu icon.
 
 == Installation ==
 
