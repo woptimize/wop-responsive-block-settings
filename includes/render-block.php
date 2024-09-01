@@ -2,7 +2,7 @@
 /**
  * Conditionally renders each block based on its visibility settings.
  *
- * @package wop-responsive-block-settings
+ * @package responsive-block-settings
  *
  * @since   1.0.0
  */
@@ -66,7 +66,6 @@ function render_block_settings( $block_content, $block ) {
 	// Order class & CSS variables
 	$style = '';
 	if ( $order && !empty($order['tablet']) || !empty($order['mobile'])) {
-
 		$style .= '--wop--order--tablet:' . $order['tablet'] . ';';
 		$style .= '--wop--order--mobile:' . $order['mobile'] . ';';
 		$classes[] = 'wop-has-order';

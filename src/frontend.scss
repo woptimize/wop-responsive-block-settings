@@ -1,41 +1,52 @@
+// Mixin for adjusting alignment in flexbox layouts
 @mixin adjust-alignment {
-	// Match "justification" and "vertical alignment" in the editor
-	// And keep it consistent
+	// Default alignment
 	align-items: flex-start;
 	justify-content: center;
 
-	&.is-content-justification-right {
-		align-items: flex-end;
-	}
-	&.is-content-justification-left {
-		align-items: flex-start;
-	}
-	&.is-content-justification-center {
-		align-items: center;
-	}
+	// Handle content justification classes
+	// This loop creates classes for right, left, and center justification
+	// It dynamically sets the align-items property based on the justification
+	@each $justification in (right, left, center) {
+		&.is-content-justification-#{$justification} {
+		  // For center, we use 'center'.
+		  // For right, we use 'flex-end'.
+		  // For left, we use 'flex-start'.
+		  align-items: if($justification == center,
+						  center,
+						  if($justification == right, flex-end, flex-start));
+		}
+	  }
+
+	// Special case for space-between justification
 	&.is-content-justification-space-between {
 		align-items: stretch;
 	}
-	&.is-vertical-align-top {
-		justify-content: flex-start;
-	}
-	&.is-vertical-align-bottom {
-		justify-content: flex-end;
-	}
-	&.is-vertical-align-center {
-		justify-content: center;
-	}
-	&.is-vertical-align-stretch {
-		justify-content: stretch;
+
+	// Handle vertical alignment classes
+	// This loop creates classes for top, bottom, center, and stretch vertical alignments
+	// It dynamically sets the justify-content property based on the alignment
+	@each $alignment in (top, bottom, center, stretch) {
+		&.is-vertical-align-#{$alignment} {
+			// We use a nested if statement to determine the correct value:
+			// - For 'center', we use 'center'
+			// - For 'stretch', we use 'stretch'
+			// - For 'top', we use 'flex-start'
+			// - For 'bottom', we use 'flex-end'
+			// This complex logic allows us to handle all cases with a single line of code
+			justify-content: if($alignment == center, center, #{flex-#{if($alignment == stretch, $alignment, if($alignment == top, start, end))}});
+		}
 	}
 }
 
+// Mixin for styling elements visible only in the editor
 @mixin visible-on-editor {
 	outline: 2px dashed #ccc;
 	opacity: .5;
 	filter: saturate(0);
 }
 
+// Mixin for custom mobile menu styles
 @mixin menu-styles {
 	.wp-block-navigation__responsive-container-open:not(.always-shown) {
 		display: none;
@@ -50,105 +61,72 @@
 	}
 }
 
-// Desktop
-@media (min-width: 1024px) {
-	body:not(.wp-admin):not(.block-editor-iframe__body) .wop-hide-on-desktop,
-	.editor-styles-wrapper .wop-hide-on-desktop.wop-hide-on-editor  {
-		display: none !important;
-	}
-	.editor-styles-wrapper .wop-hide-on-desktop:not(.wop-hide-on-editor) {
-		@include visible-on-editor;
-	}
-}
+// Mixin for generating responsive styles
+@mixin responsive-styles($device) {
+	// Define media query based on device type
+	$selector: if($device == desktop, '(min-width: 1024px)',
+				if($device == tablet, '(min-width: 768px) and (max-width: 1023px)',
+					'(max-width: 767px)'));
 
-// Tablet
-@media (min-width: 768px) and (max-width: 1023px) {
-	body:not(.wp-admin):not(.block-editor-iframe__body) .wop-hide-on-tablet,
-	.editor-styles-wrapper .wop-hide-on-tablet.wop-hide-on-editor  {
+	@media #{$selector} {
+	// Hide elements based on device
+	body:not(.wp-admin):not(.block-editor-iframe__body) .wop-hide-on-#{$device},
+	.editor-styles-wrapper .wop-hide-on-#{$device}.wop-hide-on-editor {
 		display: none !important;
 	}
-	.editor-styles-wrapper .wop-hide-on-tablet:not(.wop-hide-on-editor) {
+	// Style for elements visible only in editor
+	.editor-styles-wrapper .wop-hide-on-#{$device}:not(.wop-hide-on-editor) {
 		@include visible-on-editor;
 	}
 
-	.is-layout-flex.wop-stack-on-tablet {
-		flex-direction: column;
-		@include adjust-alignment;
-	}
+	// Apply specific styles for tablet and mobile
+	@if $device != desktop {
+		// Stack elements on smaller screens
+		.is-layout-flex.wop-stack-on-#{$device} {
+			flex-direction: column;
+			@include adjust-alignment;
+		}
 
-	.wop-reverse-on-tablet {
-		flex-direction: row-reverse;
+		// Reverse order of elements on smaller screens
+		.is-layout-flex.wop-reverse-on-#{$device} {
+			flex-direction: row-reverse;
 
-		&.is-vertical, &.wop-stack-on-tablet {
-			flex-direction: column-reverse;
+			&.is-vertical, &.wop-stack-on-#{$device} {
+				flex-direction: column-reverse;
+			}
+		}
+
+		// Apply custom ordering
+		.wop-has-order {
+			order: var(--wop--order--#{$device}, 0);
 		}
 	}
-
-	.wop-has-order {
-		order: var(--wop--order--tablet, 0);
 	}
 }
 
-// Mobile
-@media (max-width: 767px) {
-	body:not(.wp-admin):not(.block-editor-iframe__body) .wop-hide-on-mobile,
-	.editor-styles-wrapper .wop-hide-on-mobile.wop-hide-on-editor {
-		display: none !important;
-	}
-	.editor-styles-wrapper .wop-hide-on-mobile:not(.wop-hide-on-editor) {
-		@include visible-on-editor;
-	}
+// Apply responsive styles for each device type
+@include responsive-styles(desktop);
+@include responsive-styles(tablet);
+@include responsive-styles(mobile);
 
-	.wop-stack-on-mobile {
-		flex-direction: column;
-		@include adjust-alignment;
-	}
-
-	.wop-reverse-on-mobile {
-		flex-direction: row-reverse;
-
-		&.is-vertical, &.wop-stack-on-mobile {
-			flex-direction: column-reverse;
-		}
-	}
-
-	.wop-has-order {
-		order: var(--wop--order--mobile, 0);
-	}
-}
-
-// Custom Mobile Menu Breakpoint
+// Styles for custom mobile menu breakpoints
 .wop-has-mobile-menu-breakpoint {
+	// Show responsive container open button
 	.wp-block-navigation__responsive-container-open:not(.always-shown) {
 		display: flex;
 	}
 
+	// Hide responsive container by default
 	.wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
 		display: none;
 	}
-	@media (min-width: 480px) {
-		&.wop-mobile-menu-breakpoint-480 {
+
+	// Apply menu styles for different breakpoints
+	@each $breakpoint in (480, 768, 992, 1024, 1200) {
+	@media (min-width: #{$breakpoint}px) {
+		&.wop-mobile-menu-breakpoint-#{$breakpoint} {
 			@include menu-styles;
 		}
 	}
-	@media (min-width: 768px) {
-		&.wop-mobile-menu-breakpoint-768 {
-			@include menu-styles;
-		}
-	}
-	@media (min-width: 992px) {
-		&.wop-mobile-menu-breakpoint-992 {
-			@include menu-styles;
-		}
-	}
-	@media (min-width: 1024px) {
-		&.wop-mobile-menu-breakpoint-1024 {
-			@include menu-styles;
-		}
-	}
-	@media (min-width: 1200px) {
-		&.wop-mobile-menu-breakpoint-1200 {
-			@include menu-styles;
-		}
 	}
 }

@@ -4,7 +4,7 @@
 	"author": "Stefano Ginella",
 	"repository": {
 	  "type": "git",
-	  "url": "https://github.com/woptimize/wop-responsive-block-settings"
+	  "url": "https://github.com/woptimize/responsive-block-settings"
 	},
 	"license": "GPL-2.0-or-later",
 	"devDependencies": {
@@ -14,6 +14,7 @@
 	},
 	"scripts": {
 		"build": "wp-scripts build",
-		"start": "wp-scripts start"
+		"start": "wp-scripts start",
+        "plugin-zip": "wp-scripts plugin-zip"
 	}
 }

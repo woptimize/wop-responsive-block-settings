@@ -10,9 +10,9 @@
  * Author URI:        https://www.stefanoginella.com
  * License:           GPLv2 or later.
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       wop-responsive-block-settings
+ * Text Domain:       responsive-block-settings
  *
- * @package wop-responsive-block-settings
+ * @package responsive-block-settings
  *
  */
 
@@ -30,5 +30,5 @@ $includes = [
 	'scripts'
 ];
 foreach ( $includes as $include ) {
-	require_once( WOP_RBS_DIR . "inc/$include.php" );
+	require_once( WOP_RBS_DIR . "includes/$include.php" );
 }

@@ -37,7 +37,7 @@ A picture is worth a thousand words. Check out the screenshots below to see how 
 
 = Manual installation =
 
-1. Upload the `wop-responsive-block-settings` folder to the `/wp-content/plugins/` directory.
+1. Upload the `responsive-block-settings` folder to the `/wp-content/plugins/` directory.
 2. Go to **Plugins** in your WordPress admin dashboard.
 3. Find and activate the **Responsive Block Settings** plugin.
 
@@ -45,7 +45,11 @@ A picture is worth a thousand words. Check out the screenshots below to see how 
 
 = Is the plugin compatible with any theme or plugin? =
 
-Yes, the plugin is designed to work seamlessly with any theme or plugin. If you encounter any issues, please report them through the WordPress support forum.
+Yes, the plugin is designed to work seamlessly with any theme or plugin, extending the block editor. If you encounter any issues, please report them through the WordPress support forum.
+
+= Is the plugin compatible with Elementor or other page builders? =
+
+No, the plugin is designed to work exclusively with the WordPress block editor (Gutenberg).
 
 = How can I request support, report a bug, or suggest a feature? =
 
@@ -53,7 +57,7 @@ For support, bug reports, or feature requests, please use the WordPress support 
 
 = Is the plugin's source code publicly available?
 
-Yes, you can access the source code on GitHub: [Responsive Block Settings GitHub Repository](https://github.com/woptimize/wop-responsive-block-settings).
+Yes, you can access the source code on GitHub: [Responsive Block Settings GitHub Repository](https://github.com/woptimize/responsive-block-settings).
 
 
 == Changelog ==
