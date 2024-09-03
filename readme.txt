@@ -1,6 +1,6 @@
 ===  Responsive Block Settings ===
 Contributors:      stefanoginella
-Stable tag:        1.0.0
+Stable tag:        1.0.1
 Requires at least: 6.4
 Tested up to:      6.6
 Requires PHP:      7.4

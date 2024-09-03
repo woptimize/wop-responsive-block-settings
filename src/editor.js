@@ -297,7 +297,6 @@ const withResponsiveAttributes = createHigherOrderComponent( ( BlockListBlock ) 
 			( order?.tablet && order.tablet != 0 ) ||
 			( order?.mobile && order.mobile != 0 )
 		) {
-			console.log('ok')
 			classes.push( 'wop-has-order' )
 		}
 
