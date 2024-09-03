@@ -90,6 +90,10 @@ Yes, you can access the source code on GitHub: [Responsive Block Settings GitHub
 
 == Changelog ==
 
+= 1.0.1 - 2024-09-03 =
+
+- Fix: REST API issue preventing certain blocks to load in the block editor.
+
 = 1.0.0 - 2024-08-27 =
 
-Initial release.
+- Initial release.
