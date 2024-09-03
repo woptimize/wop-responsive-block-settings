@@ -65,7 +65,7 @@ This plugin provides a simple, intuitive interface, making it accessible for use
 
 = Manual installation =
 
-1. Upload the `responsive-block-settings` folder to the `/wp-content/plugins/` directory.
+1. Upload the `wop-responsive-block-settings` folder to the `/wp-content/plugins/` directory.
 2. Go to **Plugins** in your WordPress admin dashboard.
 3. Find and activate the **Responsive Block Settings** plugin.
 
@@ -85,7 +85,7 @@ For support, bug reports, or feature requests, please use the WordPress support 
 
 = Is the plugin's source code publicly available?
 
-Yes, you can access the source code on GitHub: [Responsive Block Settings GitHub Repository](https://github.com/woptimize/responsive-block-settings).
+Yes, you can access the source code on GitHub: [Responsive Block Settings GitHub Repository](https://github.com/woptimize/wop-responsive-block-settings).
 
 
 == Changelog ==

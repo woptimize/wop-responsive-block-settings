@@ -1,8 +1,9 @@
 <?php
 /**
- * Conditionally renders each block based on its visibility settings.
+ * Fix REST API issue with blocks registered via PHP register_block_type and/or rendered server-side.
+ * Without this, server-side blocks will not load in the block editor.
  *
- * @package responsive-block-settings
+ * @package wop-responsive-block-settings
  *
  * @since   1.0.1
  */
@@ -12,8 +13,6 @@ namespace Woptimize\RBS\Rest;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Fix REST API issue with blocks registered via PHP register_block_type and/or rendered server-side.
- * Without this, server-side blocks will not load in the block editor.
  *
  * Conditionally removes custom attributes from block renderer REST API requests.
  *

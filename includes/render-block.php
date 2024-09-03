@@ -2,7 +2,7 @@
 /**
  * Conditionally renders each block based on its visibility settings.
  *
- * @package responsive-block-settings
+ * @package wop-responsive-block-settings
  *
  * @since   1.0.0
  */
